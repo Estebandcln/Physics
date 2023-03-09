@@ -3,8 +3,8 @@ import numpy as np
 
 
 g=9.80665
-v=np.linspace(10,24,6)
-theta=85
+v0=np.linspace(10,24,6)     #m/s
+theta=85                    #deg
 x0=0
 y0=0
 h=0.01
@@ -19,7 +19,7 @@ eta=0.018e-3
 k=6*pi*eta*r
 """
 
-for i in v:
+for i in v0:
     
     x=x0
     y=y0
@@ -45,7 +45,7 @@ for i in v:
         k+=1
     
     plt.title('Free fall')
-    plt.plot(xlist, ylist)
-    plt.title('Free fall')
+    plt.plot(xlist, ylist,label=str('v0 = '+str(i))+' m/s')
     plt.xlabel('time (s)')
     plt.ylabel('height (m)')
+    plt.legend()

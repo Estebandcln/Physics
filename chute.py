@@ -11,9 +11,9 @@ import matplotlib.pyplot as plt
 
 
 g=9.80665
-v0=np.linspace(10,24,6)
-theta=85
-h=0
+v0=np.linspace(10,24,6)  #m/s
+theta=85                 #deg
+h=0                      #m
 plt.figure(1,dpi=300)
 for j in range(len(v0)):
     
