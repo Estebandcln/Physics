@@ -26,8 +26,8 @@ for j in range(len(v0)):
         if y0>=0:
             y.append(y0)
     x=np.linspace(0,i,len(y))
-    plt.plot(x,y,label=str('v0 = '+str(v0[j])))
-    plt.title('Chute libre')
-    plt.xlabel('temps (s)')
-    plt.ylabel('altitude (m)')
+    plt.plot(x,y,label=str('v0 = '+str(v0[j]))+' m/s')
+    plt.title('Free fall')
+    plt.xlabel('time (s)')
+    plt.ylabel('height (m)')
     plt.legend()

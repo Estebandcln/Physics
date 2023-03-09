@@ -1,17 +1,17 @@
 import matplotlib.pyplot as plt
-from math import cos, sin, pi
+import numpy as np
 
 
 g=9.80665
-v=24
-alpha=60
+v=np.linspace(10,24,6)
+theta=85
 x0=0
 y0=0
 h=0.01
 r=21.35e-3
 Cx=0.45
 rho=1.3
-S=pi*r**2
+S=np.pi*r**2
 Ff=1/2*Cx*rho*S
 
 """ #laminaire
@@ -19,34 +19,33 @@ eta=0.018e-3
 k=6*pi*eta*r
 """
 
-
-x=x0
-y=y0
-t=0
-vx=v*cos(alpha*pi/180)
-vy=v*sin(alpha*pi/180)
-
-
-xlist=[]
-ylist=[]
-
-i=0
-
-while y>=0:
-    x=x+vx*h
-    y=y+vy*h
-    t=t+h
-    vx=vx-Ff*h*vx**2
-    vy=vy-h*(g+Ff*vy**2)
-
-    xlist.append(x)
-    ylist.append(y)
-
-    i=i+1
-
-
-plt.title('Chute libre')
-
-plt.plot(xlist, ylist, 'c', linewidth=3,linestyle=':')
-
-plt.show()
+for i in v:
+    
+    x=x0
+    y=y0
+    t=0
+    vx=i*np.cos(theta*np.pi/180)
+    vy=i*np.sin(theta*np.pi/180)
+    
+    xlist=[]
+    ylist=[]
+    
+    k=0
+    
+    while y>=0:
+        x=x+vx*h
+        y=y+vy*h
+        t=t+h
+        vx=vx-Ff*h*vx**2
+        vy=vy-h*(g+Ff*vy**2)
+    
+        xlist.append(x)
+        ylist.append(y)
+    
+        k+=1
+    
+    plt.title('Free fall')
+    plt.plot(xlist, ylist)
+    plt.title('Free fall')
+    plt.xlabel('time (s)')
+    plt.ylabel('height (m)')
