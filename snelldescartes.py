@@ -44,19 +44,19 @@ for i in range(len(theta4)):
 
 thetamax=[]
 thetamin=[]
-maxi=0
-mini=90
+maxi22=0
+mini22=90
 tmin=0
 for i in range(len(thetatot)):
-    if thetatot[i]!=0 and thetatot[i]<=mini:
-        mini=thetatot[i]
-    if thetatot[i]>=maxi:
-        maxi=thetatot[i]
+    if thetatot[i]!=0 and thetatot[i]<=mini22:
+        mini22=thetatot[i]
+    if thetatot[i]>=maxi22:
+        maxi22=thetatot[i]
 
 # Same length to plot
 for i in range(len(thetatot)):
-    thetamin.append(mini)
-    thetamax.append(maxi)
+    thetamin.append(mini22)
+    thetamax.append(maxi22)
 
 # Incident angle for the first non null value
 for i in range(len(thetatot)):
@@ -110,19 +110,19 @@ for i in range(len(alpha4)):
     
 alphamax=[]
 alphamin=[]
-maxi=0
-mini=90
+maxi46=0
+mini46=90
 amin=0
 for i in range(len(alphatot)):
-    if alphatot[i]!=0 and alphatot[i]<=mini:
-        mini=alphatot[i]
-    if alphatot[i]>=maxi:
-        maxi=alphatot[i]
+    if alphatot[i]!=0 and alphatot[i]<=mini46:
+        mini46=alphatot[i]
+    if alphatot[i]>=maxi46:
+        maxi46=alphatot[i]
         
 # Same length to plot
 for i in range(len(alphatot)):
-    alphamin.append(mini)
-    alphamax.append(maxi)
+    alphamin.append(mini46)
+    alphamax.append(maxi46)
     
 # Incident angle for the first non null value
 for i in range(len(alphatot)):
@@ -143,21 +143,42 @@ plt.xlim(0,90)
 plt.ylim(0,90)
 plt.show()
 
-r22=(43.4383+21.8136)/2
-w22=43.4383-21.8136
-r46=(57.747+45.6613)/2
-w46=57.747-45.6613
+fig, ax = plt.subplots()
 
-halo_22=plt.Circle((90,90),r22,color='c',fill=False,linewidth=w22)
-halo_46=plt.Circle((90,90),r46,color='blue',fill=False,linewidth=w46)
+halo22_1=plt.Circle((90,90),mini22,color='c',fill=False)
+halo22_2=plt.Circle((90,90),maxi22,color='c',fill=False)
+halo46_1=plt.Circle((90,90),mini46,color='blue',fill=False)
+halo46_2=plt.Circle((90,90),maxi46,color='blue',fill=False)
 sun=plt.Circle((90,90),5,color='gold')
 
-fig, ax = plt.subplots()
-ax.add_patch(halo_22)
-ax.add_patch(halo_46)
+ax.add_patch(halo22_1)
+ax.add_patch(halo22_2)
+ax.add_patch(halo46_1)
+ax.add_patch(halo46_2)
 ax.add_patch(sun)
 ax.set_aspect('equal', adjustable='box')
 plt.title("Both halos around the Sun")
 plt.xlim(0,180)
 plt.ylim(0,180)
 plt.show()
+
+fig, ax = plt.subplots()
+
+r22=(43.4383+21.8136)/2
+#w22=43.4383-21.8136
+r46=(57.747+45.6613)/2
+#w46=57.747-45.6613
+
+h22=plt.Circle((90,90),r22,color='c',fill=False,linewidth=28)
+h46=plt.Circle((90,90),r46,color='blue',fill=False,linewidth=15)
+sun=plt.Circle((90,90),5,color='gold')
+
+ax.add_patch(h22)
+ax.add_patch(h46)
+ax.add_patch(sun)
+ax.set_aspect('equal', adjustable='box')
+plt.title("Both halos around the Sun")
+plt.xlim(0,180)
+plt.ylim(0,180)
+plt.show()
+
