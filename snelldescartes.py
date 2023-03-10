@@ -44,15 +44,25 @@ for i in range(len(theta4)):
 
 thetamin=[]
 mini=90
+tmin=0
 for i in range(len(thetatot)):
     if thetatot[i]!=0 and thetatot[i]<=mini:
         mini=thetatot[i]
+
+# Same length to plot
 for i in range(len(thetatot)):
     thetamin.append(mini)
 
+for i in range(len(thetatot)):
+    if thetatot[i]!=0:
+        tmin=theta1[i]
+        break
+        
+
 plt.plot(theta1,thetatot,label="Possible angles",color='m')
 plt.plot(theta1,halo22,label="22°",c='c',linestyle='-.')
-plt.plot(theta1,thetamin,label=round(thetamin[0],5),c='r',linestyle=':')
+plt.plot(theta1,thetamin,label=str(round(thetamin[0],4))+"°",c='r',linestyle=':')
+plt.axvline(x=tmin,label="$theta_{i_{min}}$ = "+str(round(tmin,4))+"°",c='b',linestyle=':')
 plt.xlabel('Incident angle')
 plt.ylabel('Total angle')
 plt.title("22° halo")
@@ -93,17 +103,30 @@ for i in range(len(alpha4)):
     
 alphamin=[]
 mini=90
+amin=0
 for i in range(len(alphatot)):
     if alphatot[i]!=0 and alphatot[i]<=mini:
         mini=alphatot[i]
+        
+# Same length to plot
 for i in range(len(alphatot)):
     alphamin.append(mini)
+    
+while amin==0:
+    for i in range(len(alphatot)):
+        amin=alphatot[i]
+
+for i in range(len(alphatot)):
+    if alphatot[i]!=0:
+        amin=alpha1[i]
+        break
 
 plt.plot(alpha1,alphatot,label="Possible angles",color='m')
-plt.plot(alpha1,halo46,label="46°",c='c',linestyle=':')
-plt.plot(theta1,alphamin,label=round(alphamin[0],5),c='r',linestyle=':')
+plt.plot(alpha1,halo46,label="46°",c='c',linestyle='-.')
+plt.plot(alpha1,alphamin,label=str(round(alphamin[0],4))+"°",c='r',linestyle=':')
+plt.axvline(x=amin,label="$alpha_{i_{min}}$ = "+str(round(amin,4))+"°",c='b',linestyle=':')
 plt.xlabel('Incident angle')
-plt.ylabel('Total angle')
+plt.ylabel('Total angle '+str(chr(945)))
 plt.title("46° halo")
 plt.legend()
 plt.xlim(0,90)
