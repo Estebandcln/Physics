@@ -11,10 +11,10 @@ from math import sin, asin, pi
 
 # 22° and 46° halos
 
-n1=1.00026                         # air
-n2=1.31                            # ice
+n1=1.00026       # air
+n2=1.31          # ice
 
-# 22° halo (deflection through hexagonal column crystals' side faces with wedge angles of 60°)
+# 22° halo (deflection through regular hexagonal column crystals' side faces)
 
 theta1=[i for i in range(0,91)]
 theta2=[]
