@@ -11,7 +11,7 @@ import numpy as np
 # N-parts wall
 
 T_i = 20  # Internal environment temperature (°C)
-T_f = 0  # External environment temperature (°C)
+T_f = 12  # External environment temperature (°C)
 S = 100  # Wall area (m²)
 
 # Materials thermal conductivity lambda
@@ -34,8 +34,8 @@ h_water = 75 #W/(m.°C)
 e_Cu = 1 #m
 e_Pb = 0.5 #m
 e_Al = 1 #m
-e_Wf = 0.02 #m
-e_Gw = 0.02 #m 
+e_Wf = 0.03 #m
+e_Gw = 0.05 #m 
 e_gl = 0.01 #m
 e_oak = 0.1 #m
 e_air = 0.5 #m
@@ -45,7 +45,7 @@ e_water = 0.5 #m
 
 f = ['Air', 'Water'] # Fluids
 m = ['Air', 'Water', 'Copper', 'Lead', 'Aluminum', 'Wood fiber', 'Glass wool', 'Glass', 'Oak'] # Layers materials
-wall = ['Air', 'Aluminum', 'Wood fiber', 'Copper', 'Glass wool', 'Water'] # Input you wall here
+wall = ['Air', 'Glass wool', 'Water'] # Input you wall here
 N1= [] # Ordered materials and fluids from the inside to the outside
 
 for i in wall:
@@ -97,23 +97,22 @@ if T_i>T_f:
             print(T_list1[a],e[i],coeff[i],T_list1[a]-phi*e[i]/(S*coeff[i]),a,i)
             a += 1
 else:
-
     for i in N1:
-        if i in f:
+        if m[i] in f:
             if len(T_list1)<2:
 
-                T_list1.append(T_i+phi/(S*coeff[i]))
+                T_list1.append(round(T_i+phi/(S*coeff[i]),5))
                 print(T_i,coeff[i],T_i-phi/(S*coeff[i]),a,i)
                 a += 1
                 
             else:
                
-                T_list1.append(T_f-phi/(S*coeff[i]))
+                T_list1.append(round(T_f-phi/(S*coeff[i]),5))
                 print(T_f,coeff[i],T_f+phi/(S*coeff[i]),a,i)
                 a += 1
                 
         else:
-            T_list1.append(T_list1[a]+phi*e[i]/(S*coeff[i]))
+            T_list1.append(round(T_list1[a]+phi*e[i]/(S*coeff[i]),5))
             print(T_list1[a],e[i],coeff[i],T_list1[a]-phi*e[i]/(S*coeff[i]),a,i)
             a += 1
             
@@ -145,7 +144,7 @@ plt.plot(x_list1, T_list1, label = 'Temperature', c='r')
 plt.legend()
 plt.title('Temperature profile')
 plt.xlabel('Wall thickness (m)')
-plt.ylabel('Temperature within the wall (°C)')
+plt.ylabel('Temperature throughout the wall (°C)')
 
 del x_list1[0]
 del x_list1[-1]
@@ -156,7 +155,7 @@ for i in x_list1:
     
 
 ############################## From the outside #############################
-print('méthode 2')
+
 N2 = []
 N = N1.copy()
 for i in range(len(N1)):
@@ -186,24 +185,23 @@ if T_i>T_f:
             print(T_list2[a],e[i],coeff[i],T_list2[a]+phi*e[i]/(S*coeff[i]),a,i)
             a += 1
 else:
-
     for i in N2:
-        if i in f:
-            if len(T_list1)<2:
+        if m[i] in f:
+            if len(T_list2)<2:
 
-                T_list2.append(T_i+phi/(S*coeff[i]))
-                print(T_i,coeff[i],T_i-phi/(S*coeff[i]),a,i)
+                T_list2.append(round(T_f-phi/(S*coeff[i]),5))
+                print(T_f,coeff[i],T_f+phi/(S*coeff[i]),a,i)
                 a += 1
                 
             else:
                
-                T_list2.append(T_f-phi/(S*coeff[i]))
-                print(T_f,coeff[i],T_f+phi/(S*coeff[i]),a,i)
+                T_list2.append(round(T_i+phi/(S*coeff[i]),5))
+                print(T_i,coeff[i],T_i-phi/(S*coeff[i]),a,i)
                 a += 1
                 
         else:
-            T_list2.append(T_list2[a]+phi*e[i]/(S*coeff[i]))
-            print(T_list2[a],e[i],coeff[i],T_list2[a]-phi*e[i]/(S*coeff[i]),a,i)
+            T_list2.append(round(T_list2[a]-phi*e[i]/(S*coeff[i]),5))
+            print(T_list2[a],e[i],coeff[i],T_list2[a]+phi*e[i]/(S*coeff[i]),a,i)
             a += 1
             
 k1 = T_list2[-1]
@@ -235,7 +233,7 @@ plt.plot(x_list2, T_list2, label = 'Temperature', c='r')
 plt.legend()
 plt.title('Temperature profile')
 plt.xlabel('Wall thickness (m)')
-plt.ylabel('Temperature within the wall (°C)')
+plt.ylabel('Temperature throughout the wall (°C)')
 
 del x_list2[0]
 del x_list2[-1]
@@ -278,7 +276,7 @@ plt.plot(x_list, T_list, label = 'Temperature', c='r')
 plt.legend()
 plt.title('Temperature profile')
 plt.xlabel('Wall thickness (m)')
-plt.ylabel('Temperature within the wall (°C)')
+plt.ylabel('Temperature throughout the wall (°C)')
 
 print(x_list)
 del x_list[0]
