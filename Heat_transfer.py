@@ -10,8 +10,8 @@ import numpy as np
 
 # N-parts wall
 
-T_i = 20  # Internal environment temperature (°C)
-T_f = 12  # External environment temperature (°C)
+T_i = 25  # Internal environment temperature (°C)
+T_f = 0  # External environment temperature (°C)
 S = 100  # Wall area (m²)
 
 # Materials thermal conductivity lambda
@@ -44,8 +44,8 @@ e_water = 0.5 #m
 # Wall composition
 
 f = ['Air', 'Water'] # Fluids
-m = ['Air', 'Water', 'Copper', 'Lead', 'Aluminum', 'Wood fiber', 'Glass wool', 'Glass', 'Oak'] # Layers materials
-wall = ['Air', 'Glass wool', 'Water'] # Input you wall here
+m = ['Air', 'Water', 'Copper', 'Lead', 'Aluminum', 'Wood fiber', 'Glass wool', 'Glass', 'Oak'] # Materials
+wall = ['Air', 'Glass wool', '', 'Oak', 'Water'] # Input your wall here
 N1= [] # Ordered materials and fluids from the inside to the outside
 
 for i in wall:
@@ -73,6 +73,9 @@ for i in N1:
         R_tot += e[i]/(coeff[i]*S)
 
 phi = np.abs(round(((T_i-T_f))/(R_tot),4))
+
+
+############################## From the inside #############################
 
 T_list1 = [T_i] # Internal environment, internal surface, n layers, external surface, external environment
 a = 0
@@ -137,20 +140,20 @@ for i in N1:
 
 x_max = x_list1[-1]
 
-plt.figure(1)
+#plt.figure(1)
 
 #x = np.linspace(0, x_max, len(T_list))
-plt.plot(x_list1, T_list1, label = 'Temperature', c='r')
-plt.legend()
-plt.title('Temperature profile')
-plt.xlabel('Wall thickness (m)')
-plt.ylabel('Temperature throughout the wall (°C)')
+#plt.plot(x_list1, T_list1, label = 'Temperature', c='r')
+#plt.legend()
+#plt.title('Temperature profile')
+#plt.xlabel('Wall thickness (m)')
+#plt.ylabel('Temperature throughout the wall (°C)')
 
 del x_list1[0]
 del x_list1[-1]
-for i in x_list1:
+#for i in x_list1:
     
-    plt.axvline(x=i, c='k', linewidth=1)
+    #plt.axvline(x=i, c='k', linewidth=1)
     
     
 
@@ -227,21 +230,21 @@ for i in N:
 T_list2.reverse()
 x_max = x_list2[-1]
 
-plt.figure(2)
+#plt.figure(2)
 #x = np.linspace(0, x_max, len(T_list))
-plt.plot(x_list2, T_list2, label = 'Temperature', c='r')
-plt.legend()
-plt.title('Temperature profile')
-plt.xlabel('Wall thickness (m)')
-plt.ylabel('Temperature throughout the wall (°C)')
+#plt.plot(x_list2, T_list2, label = 'Temperature', c='r')
+#plt.legend()
+#plt.title('Temperature profile')
+#plt.xlabel('Wall thickness (m)')
+#plt.ylabel('Temperature throughout the wall (°C)')
 
 del x_list2[0]
 del x_list2[-1]
-for i in x_list2:
+#for i in x_list2:
 
-    plt.axvline(x=i, c='k', linewidth=1)
+    #plt.axvline(x=i, c='k', linewidth=1)
 
-# Mean value? List of the converged values
+# List of the converged values
 
 x_list = [0]
 c = 0
